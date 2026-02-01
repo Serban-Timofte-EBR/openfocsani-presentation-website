@@ -1,14 +1,17 @@
-const map = L.map("map-canvas", { zoomControl: false }).setView(
-  [45.696, 27.184],
-  14,
-);
-L.tileLayer(
-  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-).addTo(map);
+const map = L.map("map-canvas", {
+  zoomControl: false,
+  tap: false,
+}).setView([45.696, 27.184], 14);
+
+L.control.zoom({ position: "topright" }).addTo(map);
+
+L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+  attribution: "&copy; OpenStreetMap contributors",
+}).addTo(map);
 
 let markers = [];
 
-const dbDummy = {
+const db = {
   "2025-H2": [
     {
       id: 1,
@@ -34,8 +37,18 @@ const dbDummy = {
       d: "Reparații trotuare",
       c: [45.701, 27.188],
     },
+  ],
+  "2026-H1": [
     {
       id: 4,
+      s: "Calea Munteniei",
+      v: 520000,
+      z: 5,
+      d: "Reabilitare sens giratoriu",
+      c: [45.678, 27.172],
+    },
+    {
+      id: 5,
       s: "Strada Obor",
       v: 92000,
       z: 2,
@@ -43,17 +56,19 @@ const dbDummy = {
       c: [45.705, 27.195],
     },
   ],
-  "2026-H1": [
-    {
-      id: 5,
-      s: "Calea Munteniei",
-      v: 520000,
-      z: 5,
-      d: "Reabilitare sens giratoriu",
-      c: [45.678, 27.172],
-    },
-  ],
 };
+
+function getZCol(z) {
+  const cols = {
+    1: "#ef4444",
+    2: "#eab308",
+    3: "#22c55e",
+    4: "#a855f7",
+    5: "#3b82f6",
+    6: "#f97316",
+  };
+  return cols[z] || "#64748b";
+}
 
 function render() {
   const period = document.getElementById("time-period").value;
@@ -64,37 +79,48 @@ function render() {
   markers = [];
   list.innerHTML = "";
 
-  let rawData = dbDummy[period] || [];
-  let filteredData =
-    zone === "toate" ? rawData : rawData.filter((x) => x.z == zone);
+  let raw = [];
+  if (period === "all") {
+    Object.values(db).forEach((p) => raw.push(...p));
+  } else {
+    raw = db[period] || [];
+  }
 
-  let totalSuma = 0;
+  let filtered = zone === "toate" ? raw : raw.filter((x) => x.z == zone);
+  let total = 0;
 
-  filteredData.forEach((item) => {
-    totalSuma += item.v;
-
+  filtered.forEach((item) => {
+    total += item.v;
     const m = L.circleMarker(item.c, {
-      radius: Math.sqrt(item.v) / 12,
-      fillColor: getZoneColor(item.z),
+      radius: Math.sqrt(item.v) / 10,
+      fillColor: getZCol(item.z),
       color: "white",
       weight: 2,
       fillOpacity: 0.8,
     }).addTo(map);
 
     m.bindPopup(
-      `<b>${item.s}</b><br>${item.d}<br><b>${item.v.toLocaleString()} RON</b>`,
+      `<div class="p-1"><b class="text-sm">${item.s}</b><p class="text-xs text-slate-600">${item.d}</p><b class="text-blue-600">${item.v.toLocaleString()} RON</b></div>`,
     );
     markers.push(m);
 
     const card = document.createElement("div");
-    card.className = "investment-card";
+    card.className =
+      "p-4 hover:bg-slate-50 cursor-pointer transition-colors flex flex-col";
     card.innerHTML = `
-            <span class="zone-tag zt${item.z}">Zona ${item.z}</span>
-            <h4>${item.s}</h4>
-            <p>${item.d}</p>
-            <span class="amount">${item.v.toLocaleString()} RON</span>
+            <div class="flex justify-between items-start mb-1">
+                <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded text-white" style="background:${getZCol(item.z)}">ZONA ${item.z}</span>
+                <span class="text-xs font-bold text-blue-600">${item.v.toLocaleString()} RON</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-800">${item.s}</h4>
+            <p class="text-xs text-slate-500">${item.d}</p>
         `;
     card.onclick = () => {
+      if (window.innerWidth < 768) {
+        document
+          .getElementById("map-canvas")
+          .scrollIntoView({ behavior: "smooth" });
+      }
       map.flyTo(item.c, 17);
       m.openPopup();
     };
@@ -102,22 +128,8 @@ function render() {
   });
 
   document.getElementById("total-amount").innerText =
-    totalSuma.toLocaleString() + " RON";
-  document.getElementById("total-count").innerText = filteredData.length;
-  document.getElementById("view-title").innerText =
-    zone === "toate" ? "Vedere Generală" : `Zona ${zone}`;
-}
-
-function getZoneColor(z) {
-  const colors = {
-    1: "#ef4444",
-    2: "#eab308",
-    3: "#22c55e",
-    4: "#a855f7",
-    5: "#3b82f6",
-    6: "#f97316",
-  };
-  return colors[z] || "#64748b";
+    total.toLocaleString() + " RON";
+  document.getElementById("total-count").innerText = filtered.length;
 }
 
 document.getElementById("time-period").addEventListener("change", render);
