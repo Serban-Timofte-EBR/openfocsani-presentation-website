@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Analiză Investiții Focșani | Open Focșani</title>
+    <title>Harta Investițiilor | Open Focșani</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="harta-investitii/css/dashboard.css" />
     <link
@@ -31,49 +31,62 @@
       </nav>
     </header>
 
-    <div class="period-header">
-      <div class="period-pill">
-        <span>Perioada:</span>
-        <select id="time-period">
-          <option value="2025-H2">Iulie - Decembrie 2025</option>
-          <option value="2026-H1">Ianuarie - Martie 2026</option>
-        </select>
+    <div class="filter-overlay">
+      <div class="pill-container">
+        <div class="filter-item">
+          <label>Perioada:</label>
+          <select id="time-period">
+            <option value="2025-H2">Iulie - Decembrie 2025</option>
+            <option value="2026-H1">Ianuarie - Martie 2026</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label>Filtru Zonă:</label>
+          <select id="zone-filter">
+            <option value="toate">Toate Zonele (Focșani)</option>
+            <option value="1">Zona 1 - Centru</option>
+            <option value="2">Zona 2 - Obor</option>
+            <option value="3">Zona 3 - Est</option>
+            <option value="4">Zona 4 - Vest</option>
+            <option value="5">Zona 5 - Sud</option>
+            <option value="6">Zona 6 - Mîndrești</option>
+          </select>
+        </div>
       </div>
     </div>
 
-    <main class="app-viewport">
-      <aside class="analysis-panel">
-        <section class="panel-header">
-          <h2>Analiză Bugetară</h2>
-          <p>
-            Distribuția investițiilor pe zonele de lucru ale consilierilor
-            locali.
-          </p>
-        </section>
-
-        <section class="stats-summary">
-          <div class="metric-card">
-            <span class="metric-label">Total Investit</span>
-            <span id="stat-total-money" class="metric-value">0 RON</span>
+    <main class="app-container">
+      <aside class="side-panel">
+        <div id="panel-default-view">
+          <div class="summary-card">
+            <h2 id="view-title">Vedere Generală</h2>
+            <p id="view-subtitle">Toate investițiile raportate în municipiu.</p>
           </div>
-          <div class="metric-card">
-            <span class="metric-label">Proiecte Identificate</span>
-            <span id="stat-project-count" class="metric-value">0</span>
-          </div>
-        </section>
 
-        <div class="search-box">
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-label">Total Buget</span>
+              <span id="total-amount" class="stat-value">0 RON</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Nr. Lucrări</span>
+              <span id="total-count" class="stat-value">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="search-wrapper">
           <input
             type="text"
             id="search-input"
-            placeholder="Caută o stradă sau lucrare..."
+            placeholder="Caută lucrare sau stradă..."
           />
         </div>
 
-        <section id="investment-feed" class="data-feed"></section>
+        <div id="investment-list" class="list-container"></div>
       </aside>
 
-      <section id="main-map"></section>
+      <section id="map-canvas"></section>
     </main>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
