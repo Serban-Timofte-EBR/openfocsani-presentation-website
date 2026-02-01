@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analiză Investiții Focșani | Open Focșani</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="harta-investitii/css/dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar">
+        <div class="navbar-inner container">
+          <a href="index.html" class="logo">
+            <span class="logo-title">Open Focsani</span>
+          </a>
+          <div class="nav-links">
+            <a href="index.html">Acasă</a>
+            <a href="harta-investitii.html" class="active">Harta Banilor</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="period-header">
+      <div class="period-pill">
+        <span>Perioada:</span>
+        <select id="time-period">
+          <option value="2025-H2">Iulie - Decembrie 2025</option>
+          <option value="2026-H1">Ianuarie - Martie 2026</option>
+        </select>
+      </div>
+    </div>
+
+    <main class="app-viewport">
+      <aside class="analysis-panel">
+        <section class="panel-header">
+          <h2>Analiză Bugetară</h2>
+          <p>
+            Distribuția investițiilor pe zonele de lucru ale consilierilor
+            locali.
+          </p>
+        </section>
+
+        <section class="stats-summary">
+          <div class="metric-card">
+            <span class="metric-label">Total Investit</span>
+            <span id="stat-total-money" class="metric-value">0 RON</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Proiecte Identificate</span>
+            <span id="stat-project-count" class="metric-value">0</span>
+          </div>
+        </section>
+
+        <div class="search-box">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Caută o stradă sau lucrare..."
+          />
+        </div>
+
+        <section id="investment-feed" class="data-feed"></section>
+      </aside>
+
+      <section id="main-map"></section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="harta-investitii/js/config-zone.js"></script>
+    <script src="harta-investitii/js/dashboard.js"></script>
+  </body>
+</html>
