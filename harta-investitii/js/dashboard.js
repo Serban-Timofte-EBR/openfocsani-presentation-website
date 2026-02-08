@@ -2,79 +2,96 @@ const map = L.map('map-canvas', { zoomControl: false }).setView([45.696, 27.184]
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
 L.control.zoom({ position: 'topright' }).addTo(map);
 
-let layers = [];
+let markers = [];
+const geoCache = {};
 
 const db = {
-    "all": [
-        { id: 1, s: "Strada Mărășești", v: 845000, z: 1, d: "Reparații trotuare și carosabil" },
-        { id: 2, s: "Bulevardul București", v: 2800000, z: 5, d: "Iluminat LED" },
-        { id: 3, s: "Strada Cuza Vodă 21", v: 1550000, z: 1, d: "Reabilitare totală" },
-        { id: 4, s: "Strada Independenței", v: 450000, z: 1, d: "Marcaje rutiere" }
+    "2025-H2": [
+        { id: 1, s: "Strada Mărășești 12", v: 145000, z: 1, d: "Reparații trotuare și accesibilitate" },
+        { id: 2, s: "Bulevardul București 25", v: 890000, z: 5, d: "Modernizare sistem iluminat public LED" },
+        { id: 3, s: "Strada Cuza Vodă 21", v: 1550000, z: 1, d: "Reabilitare totală carosabil" },
+        { id: 4, s: "Strada Independenței 4", v: 45000, z: 1, d: "Refacere marcaje rutiere" }
+    ],
+    "2026-H1": [
+        { id: 7, s: "Strada Obor 5", v: 120000, z: 2, d: "Întreținere curentă" },
+        { id: 9, s: "Calea Munteniei 50", v: 1250000, z: 5, d: "Construire sens giratoriu nou" },
+        { id: 11, s: "Strada Mîndrești", v: 560000, z: 6, d: "Pietruire drumuri" }
     ]
 };
 
-async function getCoordinates(streetName) {
+async function getCoords(name) {
+    if (geoCache[name]) return geoCache[name];
     try {
-        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(streetName + ', Focsani, Romania')}`);
-        const data = await response.json();
-        if (data && data.length > 0) {
-            return { lat: data[0].lat, lon: data[0].lon, boundingbox: data[0].boundingbox };
+        const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(name + ', Focsani, Romania')}`);
+        const d = await r.json();
+        if (d && d.length > 0) {
+            geoCache[name] = [parseFloat(d[0].lat), parseFloat(d[0].lon)];
+            return geoCache[name];
         }
-    } catch (error) {
-        console.error("Eroare la geocoding pentru:", streetName);
-    }
+    } catch (e) { console.error(e); }
     return null;
 }
 
 function getZCol(z) {
-    const colors = { 1: "#ef4444", 2: "#f59e0b", 3: "#10b981", 4: "#8b5cf6", 5: "#3b82f6", 6: "#f97316" };
-    return colors[z] || "#64748b";
+    const c = { 1: "#ef4444", 2: "#f59e0b", 3: "#10b981", 4: "#8b5cf6", 5: "#3b82f6", 6: "#f97316" };
+    return c[z] || "#64748b";
 }
 
 async function render() {
+    const period = document.getElementById('time-period').value;
     const zone = document.getElementById('zone-filter').value;
     const list = document.getElementById('investment-list');
     
-    layers.forEach(l => map.removeLayer(l));
-    layers = [];
-    list.innerHTML = '<p class="p-4 text-xs font-bold text-blue-600 animate-pulse">Se încarcă datele geografice reale...</p>';
+    markers.forEach(m => map.removeLayer(m));
+    markers = [];
+    list.innerHTML = '<div class="p-10 text-center text-[10px] font-bold text-blue-600 animate-pulse tracking-widest uppercase">Actualizare date geografice...</div>';
 
-    let filtered = zone === 'toate' ? db.all : db.all.filter(x => x.z == zone);
+    let raw = [];
+    if (period === 'all') {
+        Object.values(db).forEach(arr => raw.push(...arr));
+    } else { raw = db[period] || []; }
+
+    let filtered = zone === 'toate' ? raw : raw.filter(x => x.z == zone);
     let total = 0;
     list.innerHTML = '';
 
     for (const item of filtered) {
         total += item.v;
-        const coords = await getCoordinates(item.s);
+        const c = await getCoords(item.s);
 
-        if (coords) {
-            const marker = L.circleMarker([coords.lat, coords.lon], {
-                radius: 12,
+        if (c) {
+            // SCALARE CORECTĂ: Min 8px, Max 22px
+            const radius = Math.min(Math.max(Math.sqrt(item.v) / 45, 8), 22);
+
+            const m = L.circleMarker(c, {
+                radius: radius,
                 fillColor: getZCol(item.z),
                 color: "white",
-                weight: 3,
-                fillOpacity: 0.9
+                weight: 2,
+                fillOpacity: 0.7
             }).addTo(map);
 
-            marker.bindPopup(`<b>${item.s}</b><br>${item.d}<br><b>${item.v.toLocaleString()} RON</b>`);
-            layers.push(marker);
+            m.bindPopup(`<div class="text-xs"><b>${item.s}</b><br>${item.d}<br><b class="text-blue-600">${item.v.toLocaleString()} RON</b></div>`);
+            markers.push(m);
 
             const card = document.createElement('div');
-            card.className = 'm-2 p-4 bg-white border border-slate-100 rounded-xl hover:shadow-lg cursor-pointer transition-all';
+            card.className = 'p-4 hover:bg-slate-50 cursor-pointer transition-all border-b border-slate-50';
             card.innerHTML = `
-                <span class="text-[8px] font-black px-2 py-1 rounded text-white mb-2 inline-block" style="background:${getZCol(item.z)}">ZONA ${item.z}</span>
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-[8px] font-black px-2 py-0.5 rounded text-white uppercase" style="background:${getZCol(item.z)}">Zona ${item.z}</span>
+                    <span class="text-xs font-bold text-blue-600">${item.v.toLocaleString()} RON</span>
+                </div>
                 <h4 class="text-sm font-bold text-slate-800">${item.s}</h4>
-                <p class="text-xs text-blue-600 font-bold">${item.v.toLocaleString()} RON</p>
+                <p class="text-[11px] text-slate-500 leading-tight">${item.d}</p>
             `;
-            
             card.onclick = () => {
-                map.flyTo([coords.lat, coords.lon], 16);
-                marker.openPopup();
+                if (window.innerWidth < 768) window.scrollTo({top: 0, behavior: 'smooth'});
+                map.flyTo(c, 16);
+                m.openPopup();
             };
             list.appendChild(card);
         }
     }
-
     document.getElementById('total-amount').innerText = total.toLocaleString() + " RON";
     document.getElementById('total-count').innerText = filtered.length;
 }
