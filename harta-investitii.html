@@ -6,74 +6,98 @@
     <title>Harta Banilor | Open Focșani</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
         #map-canvas { touch-action: pan-x pan-y; }
-        /* Asigură scroll fluid pe iOS */
         .overflow-y-auto { -webkit-overflow-scrolling: touch; }
+        .leaflet-popup-content-wrapper { border-radius: 12px; padding: 4px; }
+        .nav-links a, .nav-dropdown-toggle { transition: all 0.2s; }
     </style>
 </head>
 <body class="h-full flex flex-col bg-white overflow-hidden">
 
     <header class="h-16 border-b border-slate-200 flex items-center shrink-0 z-[100] bg-white">
         <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="index.html" class="flex flex-col">
-                <span class="font-bold text-slate-900 leading-none">Open Focșani</span>
-                <span class="text-[10px] text-slate-500 uppercase tracking-wider font-bold">Audit Civic</span>
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black shadow-lg shadow-blue-200">OF</div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-slate-900 leading-none text-base tracking-tight">Open Focșani</span>
+                    <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Harta Investițiilor</span>
+                </div>
             </a>
-            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
-                <a href="index.html" class="hover:text-blue-600">Acasă</a>
-                <a href="harta-investitii.html" class="text-blue-600 font-bold">Harta Banilor</a>
-                <a href="contact.html" class="hover:text-blue-600">Contact</a>
-            </nav>
+            <div class="nav-links hidden md:flex items-center gap-6">
+                <a href="index.html" class="text-sm font-bold text-slate-600 hover:text-blue-600">Acasă</a>
+                <div class="relative group">
+                    <button class="nav-dropdown-toggle text-sm font-bold text-slate-600 flex items-center gap-1 group-hover:text-blue-600">
+                        Proiecte <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-48 bg-white border border-slate-100 shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-[110]">
+                        <a href="vezifocsani.html" class="block px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-t-xl">Vezi App</a>
+                        <a href="rbc.html" class="block px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-b-xl">Romanian Blues Challenge</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="text-sm font-bold text-slate-600 hover:text-blue-600">Contact</a>
+                <a href="index.html#implica-te" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md shadow-blue-100 hover:bg-blue-700 transition">Vreau să mă implic</a>
+            </div>
         </div>
     </header>
 
     <main class="flex-1 flex flex-col md:flex-row overflow-hidden">
-        
-        <section class="flex-1 relative h-[40%] md:h-full order-1 md:order-2 border-b md:border-b-0 border-slate-200">
+        <section class="flex-1 relative h-[35%] md:h-full order-1 md:order-2">
             <div id="map-canvas" class="h-full w-full"></div>
         </section>
 
-        <aside class="w-full md:w-[400px] bg-white flex flex-col order-2 md:order-1 h-[60%] md:h-full z-50">
-            
-            <div class="p-5 border-b border-slate-100 shrink-0 shadow-sm">
-                <h1 class="text-xl font-black text-slate-900 leading-tight">Analiză Bugetară</h1>
-                
-                <div class="grid grid-cols-2 gap-3 mt-4">
-                    <div class="bg-blue-50 p-3 rounded-xl">
-                        <p class="text-[9px] font-bold text-blue-400 uppercase">Investit</p>
-                        <p id="total-amount" class="text-sm font-black text-blue-700">0 RON</p>
+        <aside class="w-full md:w-[420px] bg-white flex flex-col order-2 md:order-1 h-[65%] md:h-full z-50 border-r border-slate-100 shadow-2xl">
+            <div class="p-6 shrink-0 bg-white">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tighter italic">Monitorizare<br>Bugetară</h2>
+                    <div class="text-right">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Status Audit</p>
+                        <p class="text-xs font-bold text-emerald-500 flex items-center justify-end gap-1">
+                            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> Actualizat
+                        </p>
                     </div>
-                    <div class="bg-slate-50 p-3 rounded-xl">
-                        <p class="text-[9px] font-bold text-slate-400 uppercase">Proiecte</p>
-                        <p id="total-count" class="text-sm font-black text-slate-800">0</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-slate-50 border border-slate-100 p-4 rounded-2xl">
+                        <p class="text-[10px] font-black text-slate-400 uppercase mb-1">Total Fonduri</p>
+                        <p id="total-amount" class="text-lg font-black text-blue-600 tracking-tight">0 RON</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-100 p-4 rounded-2xl">
+                        <p class="text-[10px] font-black text-slate-400 uppercase mb-1">Proiecte Active</p>
+                        <p id="total-count" class="text-lg font-black text-slate-800 tracking-tight">0</p>
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-2 mt-4">
-                    <select id="time-period" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs font-bold outline-none focus:border-blue-500">
-                        <option value="all">Toate datele</option>
-                        <option value="2025-H2">Iulie - Decembrie 2025</option>
-                        <option value="2026-H1">Ianuarie - Martie 2026</option>
-                    </select>
-                    <select id="zone-filter" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs font-bold outline-none focus:border-blue-500">
-                        <option value="toate">Focșani (Toate Zonele)</option>
-                        <option value="1">Zona 1 - Centru</option>
-                        <option value="2">Zona 2 - Obor</option>
-                        <option value="3">Zona 3 - Est</option>
-                        <option value="4">Zona 4 - Vest</option>
-                        <option value="5">Zona 5 - Sud</option>
-                        <option value="6">Zona 6 - Mîndrești</option>
-                    </select>
+                <div class="space-y-3">
+                    <div class="relative group">
+                        <label class="absolute -top-2 left-3 bg-white px-1 text-[9px] font-black text-slate-400 uppercase">Perioadă Raportare</label>
+                        <select id="time-period" class="w-full bg-white border-2 border-slate-100 rounded-xl p-3 text-xs font-bold outline-none focus:border-blue-500 transition-all appearance-none cursor-pointer">
+                            <option value="all">Toate datele disponibile</option>
+                            <option value="2025-H2">Semestrul II - 2025</option>
+                            <option value="2026-H1">Semestrul I - 2026</option>
+                        </select>
+                    </div>
+                    <div class="relative group">
+                        <label class="absolute -top-2 left-3 bg-white px-1 text-[9px] font-black text-slate-400 uppercase">Sector Consilieri</label>
+                        <select id="zone-filter" class="w-full bg-white border-2 border-slate-100 rounded-xl p-3 text-xs font-bold outline-none focus:border-blue-500 transition-all appearance-none cursor-pointer">
+                            <option value="toate">Întreg Municipiul</option>
+                            <option value="1">Zona 1 - Centru</option>
+                            <option value="2">Zona 2 - Obor</option>
+                            <option value="3">Zona 3 - Est</option>
+                            <option value="4">Zona 4 - Vest</option>
+                            <option value="5">Zona 5 - Sud</option>
+                            <option value="6">Zona 6 - Mîndrești</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <div id="investment-list" class="flex-1 overflow-y-auto divide-y divide-slate-50 pb-20">
+            <div id="investment-list" class="flex-1 overflow-y-auto divide-y divide-slate-50 px-2 pb-10 custom-scroll">
                 </div>
         </aside>
-
     </main>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

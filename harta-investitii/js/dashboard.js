@@ -2,75 +2,78 @@ const map = L.map('map-canvas', { zoomControl: false }).setView([45.696, 27.184]
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
 L.control.zoom({ position: 'topright' }).addTo(map);
 
-let markers = [];
+let layers = [];
 
 const db = {
-    "2025-H2": [
-        { id: 1, s: "Strada Cuza Vodă", v: 150000, z: 1, d: "Asfaltare carosabil", c: [45.696, 27.184] },
-        { id: 2, s: "Bulevardul București", v: 280000, z: 5, d: "Sistem iluminat LED", c: [45.685, 27.178] },
-        { id: 3, s: "Strada Mărășești", v: 45000, z: 1, d: "Reparații trotuare", c: [45.701, 27.188] }
-    ],
-    "2026-H1": [
-        { id: 4, s: "Calea Munteniei", v: 520000, z: 5, d: "Reabilitare sens giratoriu", c: [45.678, 27.172] },
-        { id: 5, s: "Strada Obor", v: 92000, z: 2, d: "Amenajare parcări", c: [45.705, 27.195] }
+    "all": [
+        { id: 1, s: "Strada Mărășești", v: 845000, z: 1, d: "Reparații trotuare și carosabil" },
+        { id: 2, s: "Bulevardul București", v: 2800000, z: 5, d: "Iluminat LED" },
+        { id: 3, s: "Strada Cuza Vodă 21", v: 1550000, z: 1, d: "Reabilitare totală" },
+        { id: 4, s: "Strada Independenței", v: 450000, z: 1, d: "Marcaje rutiere" }
     ]
 };
+
+async function getCoordinates(streetName) {
+    try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(streetName + ', Focsani, Romania')}`);
+        const data = await response.json();
+        if (data && data.length > 0) {
+            return { lat: data[0].lat, lon: data[0].lon, boundingbox: data[0].boundingbox };
+        }
+    } catch (error) {
+        console.error("Eroare la geocoding pentru:", streetName);
+    }
+    return null;
+}
 
 function getZCol(z) {
     const colors = { 1: "#ef4444", 2: "#f59e0b", 3: "#10b981", 4: "#8b5cf6", 5: "#3b82f6", 6: "#f97316" };
     return colors[z] || "#64748b";
 }
 
-function render() {
-    const period = document.getElementById('time-period').value;
+async function render() {
     const zone = document.getElementById('zone-filter').value;
     const list = document.getElementById('investment-list');
     
-    markers.forEach(m => map.removeLayer(m));
-    markers = [];
+    layers.forEach(l => map.removeLayer(l));
+    layers = [];
+    list.innerHTML = '<p class="p-4 text-xs font-bold text-blue-600 animate-pulse">Se încarcă datele geografice reale...</p>';
+
+    let filtered = zone === 'toate' ? db.all : db.all.filter(x => x.z == zone);
+    let total = 0;
     list.innerHTML = '';
 
-    let raw = [];
-    if (period === 'all') {
-        Object.values(db).forEach(p => raw.push(...p));
-    } else {
-        raw = db[period] || [];
-    }
-
-    let filtered = zone === 'toate' ? raw : raw.filter(x => x.z == zone);
-    let total = 0;
-
-    filtered.forEach(item => {
+    for (const item of filtered) {
         total += item.v;
-        const m = L.circleMarker(item.c, {
-            radius: Math.sqrt(item.v) / 10,
-            fillColor: getZCol(item.z),
-            color: "white",
-            weight: 2,
-            fillOpacity: 0.8
-        }).addTo(map);
+        const coords = await getCoordinates(item.s);
 
-        m.bindPopup(`<b>${item.s}</b><br>${item.d}<br><b>${item.v.toLocaleString()} RON</b>`);
-        markers.push(m);
+        if (coords) {
+            const marker = L.circleMarker([coords.lat, coords.lon], {
+                radius: 12,
+                fillColor: getZCol(item.z),
+                color: "white",
+                weight: 3,
+                fillOpacity: 0.9
+            }).addTo(map);
 
-        const card = document.createElement('div');
-        card.className = 'p-4 hover:bg-slate-50 cursor-pointer transition-colors';
-        card.innerHTML = `
-            <div class="flex justify-between items-center mb-1">
-                <span class="text-[8px] font-black px-2 py-0.5 rounded text-white" style="background:${getZCol(item.z)}">ZONA ${item.z}</span>
-                <span class="text-xs font-black text-blue-600">${item.v.toLocaleString()} RON</span>
-            </div>
-            <h4 class="text-sm font-bold text-slate-800">${item.s}</h4>
-            <p class="text-[11px] text-slate-500 leading-tight">${item.d}</p>
-        `;
-        card.onclick = () => {
-            map.flyTo(item.c, 16);
-            m.openPopup();
-            // Pe mobil, facem scroll ușor sus să vedem harta după click pe listă
-            if(window.innerWidth < 768) window.scrollTo({top: 0, behavior: 'smooth'});
-        };
-        list.appendChild(card);
-    });
+            marker.bindPopup(`<b>${item.s}</b><br>${item.d}<br><b>${item.v.toLocaleString()} RON</b>`);
+            layers.push(marker);
+
+            const card = document.createElement('div');
+            card.className = 'm-2 p-4 bg-white border border-slate-100 rounded-xl hover:shadow-lg cursor-pointer transition-all';
+            card.innerHTML = `
+                <span class="text-[8px] font-black px-2 py-1 rounded text-white mb-2 inline-block" style="background:${getZCol(item.z)}">ZONA ${item.z}</span>
+                <h4 class="text-sm font-bold text-slate-800">${item.s}</h4>
+                <p class="text-xs text-blue-600 font-bold">${item.v.toLocaleString()} RON</p>
+            `;
+            
+            card.onclick = () => {
+                map.flyTo([coords.lat, coords.lon], 16);
+                marker.openPopup();
+            };
+            list.appendChild(card);
+        }
+    }
 
     document.getElementById('total-amount').innerText = total.toLocaleString() + " RON";
     document.getElementById('total-count').innerText = filtered.length;
