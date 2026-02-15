@@ -4,20 +4,29 @@ L.control.zoom({ position: 'topright' }).addTo(map);
 
 let markers = [];
 const geoCache = {};
+let db = {};
 
-const db = {
-    "2025-H2": [
-        { id: 1, s: "Strada Mărășești 12", v: 145000, z: 1, d: "Reparații trotuare și accesibilitate" },
-        { id: 2, s: "Bulevardul București 25", v: 890000, z: 5, d: "Modernizare sistem iluminat public LED" },
-        { id: 3, s: "Strada Cuza Vodă 21", v: 1550000, z: 1, d: "Reabilitare totală carosabil" },
-        { id: 4, s: "Strada Independenței 4", v: 45000, z: 1, d: "Refacere marcaje rutiere" }
-    ],
-    "2026-H1": [
-        { id: 7, s: "Strada Obor 5", v: 120000, z: 2, d: "Întreținere curentă" },
-        { id: 9, s: "Calea Munteniei 50", v: 1250000, z: 5, d: "Construire sens giratoriu nou" },
-        { id: 11, s: "Strada Mîndrești", v: 560000, z: 6, d: "Pietruire drumuri" }
-    ]
-};
+async function loadData() {
+    try {
+        const response = await fetch('harta-investitii/data/investitii.json');
+        db = await response.json();
+    } catch (e) {
+        console.warn('Fetch failed, using embedded data');
+        db = {
+            "2025-H2": [
+                { id: 1, s: "Strada Mărășești 12", v: 145000, z: 1, d: "Reparații trotuare și accesibilitate" },
+                { id: 2, s: "Bulevardul București 25", v: 890000, z: 5, d: "Modernizare sistem iluminat public LED" },
+                { id: 3, s: "Strada Cuza Vodă 21", v: 1550000, z: 1, d: "Reabilitare totală carosabil" },
+                { id: 4, s: "Strada Independenței 4", v: 45000, z: 1, d: "Refacere marcaje rutiere" }
+            ],
+            "2026-H1": [
+                { id: 7, s: "Strada Obor 5", v: 120000, z: 2, d: "Întreținere curentă" },
+                { id: 9, s: "Calea Munteniei 50", v: 1250000, z: 5, d: "Construire sens giratoriu nou" },
+                { id: 11, s: "Strada Mîndrești", v: 560000, z: 6, d: "Pietruire drumuri" }
+            ]
+        };
+    }
+}
 
 async function getCoords(name) {
     if (geoCache[name]) return geoCache[name];
@@ -98,4 +107,7 @@ async function render() {
 
 document.getElementById('time-period').addEventListener('change', render);
 document.getElementById('zone-filter').addEventListener('change', render);
-window.onload = render;
+window.onload = async () => {
+    await loadData();
+    render();
+};
