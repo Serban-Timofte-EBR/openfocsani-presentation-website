@@ -1,27 +1,644 @@
 {
   "2025-H2": [
-    { "id": 101, "s": "Bulevardul Gării", "v": 225884.83, "z": 1, "d": "Reparații decapări manuale și covor asfaltic (include Al. Căminului, Al. Vlahuță, Pasarela Odobești, Republicii)", "st": "Finalizat" },
-    { "id": 102, "s": "Strada Cezar Bolliac", "v": 132327.2, "z": 1, "d": "Așternere covor asfaltic 4cm (Cezar Bolliac/Lupeni)", "st": "Finalizat" },
-    { "id": 103, "s": "Strada Fundătura Vâlcele", "v": 13043.07, "z": 4, "d": "Autogreder – balastat și reprofilat (Vâlcele și Gh. Apostoleanu)", "st": "Finalizat" },
-    { "id": 104, "s": "Bulevardul Republicii", "v": 98758.3, "z": 1, "d": "Frezat și așternere covor asfaltic parcare DGPCI", "st": "Finalizat" },
-    { "id": 105, "s": "Aleea Căminului", "v": 5871.43, "z": 1, "d": "Reparații decapări manuale (Zona Paco / Ion Neculce)", "st": "Finalizat" },
-    { "id": 106, "s": "Calea Moldovei", "v": 29023.67, "z": 2, "d": "Reparații prin balastare (Fdt. Comisia Centrală, Dorobanți, Virtuții)", "st": "Finalizat" },
-    { "id": 107, "s": "Piața Moldovei", "v": 60926.75, "z": 1, "d": "Reparații decapări manuale (include Unirea Principatelor, Cotesti, Ion Neculce, Al. Sudului)", "st": "Finalizat" },
-    { "id": 108, "s": "Bulevardul Munteniei", "v": 558600.98, "z": 5, "d": "Frezat și reparații mecanice intersecție Bd. Brăilei - Calea Moldovei", "st": "Finalizat" },
-    { "id": 109, "s": "Aleea Florilor", "v": 100353.1, "z": 5, "d": "Reparații decapări manuale trotuare și carosabil (include Mugur, Antrepozite, Războieni)", "st": "Finalizat" },
-    { "id": 110, "s": "Strada Autogării", "v": 263818.96, "z": 1, "d": "Reparații mecanice și covor asfaltic (Intrare Autogară, Piața Hală, Al. Florilor)", "st": "Finalizat" },
-    { "id": 111, "s": "Calea Munteniei", "v": 123429.98, "z": 5, "d": "Reparații mecanice și covor parcare Hyundai / Paco", "st": "Finalizat" },
-    { "id": 112, "s": "Calea Munteniei", "v": 6391.75, "z": 5, "d": "Reparații prin balastare parcare Tata și Fiul", "st": "Finalizat" },
-    { "id": 113, "s": "Strada Dimitrie Cantemir", "v": 13774.76, "z": 1, "d": "Scos și remontat pavele trotuar (între CJV și Balada)", "st": "Finalizat" },
-    { "id": 114, "s": "Strada Verde", "v": 12329.16, "z": 3, "d": "Reparații prin balastare (Parcare Școala 5, Sălcamului, Caisului, Șurii)", "st": "Finalizat" },
-    { "id": 115, "s": "Strada Revoluției", "v": 10050.64, "z": 5, "d": "Balastare și reprofilare parcare (mixtură asfaltică frezată)", "st": "Finalizat" },
-    { "id": 116, "s": "Strada Rovine", "v": 14357.89, "z": 2, "d": "Reparații prin balastare (Oborul de Vite, Zăbala, Drumușor)", "st": "Finalizat" },
-    { "id": 201, "s": "Strada Victoriei 1", "v": 0, "z": 1, "d": "Eficiență energetică clădire Primăria Focșani", "st": "În execuție" },
-    { "id": 202, "s": "Strada Unirea Principatelor", "v": 0, "z": 1, "d": "Performanță energetică Cinematograf Unirea", "st": "În execuție" },
-    { "id": 203, "s": "Strada Mândrești", "v": 0, "z": 6, "d": "Extindere rețea distribuție gaze naturale cartier Mândrești", "st": "În execuție" },
-    { "id": 204, "s": "Strada Nicolae Bălcescu", "v": 0, "z": 1, "d": "Refacere infrastructură străzi și sistematizare verticală", "st": "În execuție" },
-    { "id": 205, "s": "Strada Magazia Gării", "v": 0, "z": 1, "d": "Reparații și așternere covoare asfaltice", "st": "În execuție" },
-    { "id": 206, "s": "Strada Prof. C. Stere", "v": 0, "z": 3, "d": "Refacere infrastructură străzi (Ecaterina Varga, Agriculturii, Crișana etc.)", "st": "În execuție" },
-    { "id": 207, "s": "Strada Aviatorilor", "v": 0, "z": 4, "d": "Refacere infrastructură (Alecu Sihleanu, Maior Șonțu, Aleea Cuza Vodă)", "st": "În execuție" }
+    {
+      "id": "1-1",
+      "s": "Bulevardul Gării",
+      "v": 20534.98,
+      "z": 1,
+      "d": "Reparații decapare și asfalt (Segment Gării)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "1-2",
+      "s": "Aleea Căminului",
+      "v": 20534.98,
+      "z": 1,
+      "d": "Reparații decapare și asfalt (Segment Căminului)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "1-3",
+      "s": "Strada Mărășești",
+      "v": 20534.98,
+      "z": 1,
+      "d": "Reparații decapare și asfalt (Segment Mărășești - Romeo)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "1-4",
+      "s": "Aleea Alexandru Vlahuță",
+      "v": 20534.98,
+      "z": 1,
+      "d": "Reparații decapare și asfalt (Segment Vlahuță)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "1-5",
+      "s": "Pasarela Odobești",
+      "v": 20534.98,
+      "z": 4,
+      "d": "Reparații decapare și asfalt (Segment Pasarelă)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "1-6",
+      "s": "Strada Leon Kalustian",
+      "v": 20534.98,
+      "z": 4,
+      "d": "Reparații decapare și asfalt (Segment Kalustian)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "1-7",
+      "s": "Strada Lupeni",
+      "v": 20534.98,
+      "z": 1,
+      "d": "Reparații decapare și asfalt (Segment Lupeni OPC)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "1-8",
+      "s": "Bulevardul Republicii",
+      "v": 20534.98,
+      "z": 1,
+      "d": "Reparații decapare și asfalt (Segment Republicii)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "1-9",
+      "s": "DN23",
+      "v": 20534.98,
+      "z": 6,
+      "d": "Reparații decapare și asfalt (Segment Milcovul)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "1-10",
+      "s": "Strada Cezar Bolliac",
+      "v": 20534.98,
+      "z": 1,
+      "d": "Reparații decapare și asfalt (Segment Bolliac)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "2-1",
+      "s": "Strada Cezar Bolliac",
+      "v": 66163.6,
+      "z": 1,
+      "d": "Așternere covor asfaltic 4cm",
+      "st": "Finalizat"
+    },
+    {
+      "id": "2-2",
+      "s": "Strada Lupeni",
+      "v": 66163.6,
+      "z": 1,
+      "d": "Așternere covor asfaltic 4cm",
+      "st": "Finalizat"
+    },
+    {
+      "id": "3-1",
+      "s": "Strada Fundătura Vâlcele",
+      "v": 6521.53,
+      "z": 4,
+      "d": "Autogreder - balastat și reprofilat",
+      "st": "Finalizat"
+    },
+    {
+      "id": "3-2",
+      "s": "Strada Gheorghe Apostoleanu",
+      "v": 6521.53,
+      "z": 3,
+      "d": "Autogreder - balastat și reprofilat",
+      "st": "Finalizat"
+    },
+    {
+      "id": "4",
+      "s": "Bulevardul Republicii 97",
+      "v": 98758.3,
+      "z": 1,
+      "d": "Frezat și asfaltare parcare DGPCI",
+      "st": "Finalizat"
+    },
+    {
+      "id": "5-1",
+      "s": "Aleea Căminului",
+      "v": 2935.71,
+      "z": 1,
+      "d": "Reparații decapare manuală (Zona Paco)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "5-2",
+      "s": "Strada Ion Neculce",
+      "v": 2935.71,
+      "z": 1,
+      "d": "Reparații decapare manuală",
+      "st": "Finalizat"
+    },
+    {
+      "id": "6-1",
+      "s": "Fundătura Comisia Centrală",
+      "v": 5804.73,
+      "z": 2,
+      "d": "Reparații prin balastare și reprofilare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "6-2",
+      "s": "Calea Moldovei",
+      "v": 5804.73,
+      "z": 2,
+      "d": "Reparații prin balastare și reprofilare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "6-3",
+      "s": "Strada Golești",
+      "v": 5804.73,
+      "z": 5,
+      "d": "Reparații prin balastare (Drumul Râmpii)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "6-4",
+      "s": "Strada Dorobanți",
+      "v": 5804.73,
+      "z": 2,
+      "d": "Reparații prin balastare și reprofilare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "6-5",
+      "s": "Strada Virtuții",
+      "v": 5804.73,
+      "z": 2,
+      "d": "Reparații prin balastare și reprofilare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "7-1",
+      "s": "Piața Moldovei",
+      "v": 7615.84,
+      "z": 1,
+      "d": "Reparații decapare manuală (Zona Piață)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "7-2",
+      "s": "Strada Unirea Principatelor",
+      "v": 7615.84,
+      "z": 1,
+      "d": "Reparații decapare manuală",
+      "st": "Finalizat"
+    },
+    {
+      "id": "7-3",
+      "s": "Fundătura Ana Ipătescu",
+      "v": 7615.84,
+      "z": 1,
+      "d": "Reparații decapare manuală",
+      "st": "Finalizat"
+    },
+    {
+      "id": "7-4",
+      "s": "Oborul de Vite",
+      "v": 7615.84,
+      "z": 2,
+      "d": "Reparații decapare manuală",
+      "st": "Finalizat"
+    },
+    {
+      "id": "7-5",
+      "s": "Strada Cotești",
+      "v": 7615.84,
+      "z": 5,
+      "d": "Reparații decapare manuală",
+      "st": "Finalizat"
+    },
+    {
+      "id": "7-6",
+      "s": "Strada Ion Neculce",
+      "v": 7615.84,
+      "z": 1,
+      "d": "Reparații decapare manuală",
+      "st": "Finalizat"
+    },
+    {
+      "id": "7-7",
+      "s": "Aleea Sudului",
+      "v": 7615.84,
+      "z": 5,
+      "d": "Reparații decapare manuală",
+      "st": "Finalizat"
+    },
+    {
+      "id": "8",
+      "s": "Calea Munteniei",
+      "v": 558600.98,
+      "z": 5,
+      "d": "Intersecție Moldovei-Munteniei-Brăilei (Covor asfaltic)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "9-1",
+      "s": "Strada Mugur",
+      "v": 14336.15,
+      "z": 3,
+      "d": "Reparații decapare și trotuar",
+      "st": "Finalizat"
+    },
+    {
+      "id": "9-2",
+      "s": "Aleea Florilor",
+      "v": 14336.15,
+      "z": 5,
+      "d": "Reparații decapare și trotuar",
+      "st": "Finalizat"
+    },
+    {
+      "id": "9-3",
+      "s": "Strada Antrepozite",
+      "d": "Reparații decapare manuală",
+      "v": 14336.15,
+      "z": 3,
+      "st": "Finalizat"
+    },
+    {
+      "id": "9-4",
+      "s": "Strada Dionysos",
+      "v": 14336.15,
+      "z": 3,
+      "d": "Reparații decapare manuală",
+      "st": "Finalizat"
+    },
+    {
+      "id": "9-5",
+      "s": "Strada Războieni",
+      "v": 14336.15,
+      "z": 3,
+      "d": "Reparații decapare manuală",
+      "st": "Finalizat"
+    },
+    {
+      "id": "9-6",
+      "s": "Strada Anul Revoluționar 1948",
+      "v": 14336.15,
+      "z": 4,
+      "d": "Reparații decapare manuală",
+      "st": "Finalizat"
+    },
+    {
+      "id": "9-7",
+      "s": "Strada Mitropolit Varlaam",
+      "v": 14336.15,
+      "z": 4,
+      "d": "Reparații decapare manuală",
+      "st": "Finalizat"
+    },
+    {
+      "id": "10-1",
+      "s": "Strada Autogării",
+      "v": 87939.65,
+      "z": 1,
+      "d": "Reparații mecanice și covor asfaltic (Intrare Autogară)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "10-2",
+      "s": "Piața Hala Moldovei",
+      "v": 87939.65,
+      "z": 1,
+      "d": "Reparații mecanice și covor asfaltic",
+      "st": "Finalizat"
+    },
+    {
+      "id": "10-3",
+      "s": "Aleea Florilor",
+      "v": 87939.65,
+      "z": 5,
+      "d": "Reparații mecanice și covor asfaltic",
+      "st": "Finalizat"
+    },
+    {
+      "id": "11",
+      "s": "Calea Munteniei",
+      "v": 123429.98,
+      "z": 5,
+      "d": "Centură - Parcare Paco - Hyundai (Covor asfaltic)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "12",
+      "s": "Calea Munteniei",
+      "v": 6391.75,
+      "z": 5,
+      "d": "Centură - Parcare Tata și Fiul (Balastare)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "13",
+      "s": "Strada Dimitrie Cantemir",
+      "v": 13774.76,
+      "z": 1,
+      "d": "Remontat pavele trotuar (CJV - Balada)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "14-1",
+      "s": "Strada Verde",
+      "v": 2054.86,
+      "z": 3,
+      "d": "Reparații prin balastare (Parcare Școala 5)",
+      "st": "Finalizat"
+    },
+    {
+      "id": "14-2",
+      "s": "Strada Salcâmului",
+      "v": 2054.86,
+      "z": 3,
+      "d": "Reparații prin balastare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "14-3",
+      "s": "Strada Caisului",
+      "v": 2054.86,
+      "z": 3,
+      "d": "Reparații prin balastare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "14-4",
+      "s": "Strada Șurii",
+      "v": 2054.86,
+      "z": 3,
+      "d": "Reparații prin balastare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "14-5",
+      "s": "Strada Prunului",
+      "v": 2054.86,
+      "z": 3,
+      "d": "Reparații prin balastare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "15",
+      "s": "Strada Revoluției",
+      "v": 10050.64,
+      "z": 4,
+      "d": "Balastare și reprofilare parcare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "16-1",
+      "s": "Oborul de Vite",
+      "v": 3589.47,
+      "z": 2,
+      "d": "Reparații prin balastare și reprofilare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "16-2",
+      "s": "Strada Rovine",
+      "v": 3589.47,
+      "z": 2,
+      "d": "Reparații prin balastare și reprofilare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "16-3",
+      "s": "Strada Zăbala",
+      "v": 3589.47,
+      "z": 2,
+      "d": "Reparații prin balastare și reprofilare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "16-4",
+      "s": "Strada Drumușor",
+      "v": 3589.47,
+      "z": 2,
+      "d": "Reparații prin balastare și reprofilare",
+      "st": "Finalizat"
+    },
+    {
+      "id": "INV-01",
+      "s": "Primaria Municipiului Focsani",
+      "v": 0,
+      "z": 1,
+      "d": "Creșterea eficienței energetice a clădirii Primăriei",
+      "st": "În execuție"
+    },
+    {
+      "id": "INV-02-a",
+      "s": "Scoala Gimnaziala Alexandru Vlahuta Focsani",
+      "v": 0,
+      "z": 1,
+      "d": "Renovarea energetică a clădirii Școlii Al. Vlahuță",
+      "st": "În execuție"
+    },
+    {
+      "id": "INV-02-b",
+      "s": "Scoala Gimnaziala Nicolae Iorga Focsani",
+      "v": 0,
+      "z": 5,
+      "d": "Renovarea energetică a clădirii Școlii Nicolae Iorga",
+      "st": "În execuție"
+    },
+    {
+      "id": "INV-03",
+      "s": "Cinematograful Unirea Focsani",
+      "v": 0,
+      "z": 1,
+      "d": "Creșterea performanței energetice a Cinematografului Unirea",
+      "st": "În execuție"
+    },
+    {
+      "id": "INV-04",
+      "s": "Bulevardul Unirii",
+      "v": 0,
+      "z": 1,
+      "d": "Reabilitarea și extinderea Sistemului de iluminat public - nivelul 1",
+      "st": "În execuție"
+    },
+    {
+      "id": "INV-05",
+      "s": "Strada Anghel Saligny",
+      "v": 0,
+      "z": 3,
+      "d": "Reabilitarea sistemului de termoficare urbană (etapa a III-a)",
+      "st": "În execuție"
+    },
+    {
+      "id": "INV-06",
+      "s": "Bulevardul Brailei",
+      "v": 0,
+      "z": 5,
+      "d": "Resistematizarea infrastructurii de transport (transport public, biciclete, pietonal)",
+      "st": "În execuție"
+    },
+    {
+      "id": "INV-07",
+      "s": "Calea Moldovei",
+      "v": 0,
+      "z": 2,
+      "d": "Înființarea de centre de colectare prin aport voluntar",
+      "st": "În execuție"
+    },
+    {
+      "id": "INV-08",
+      "s": "Strada Republicii",
+      "v": 0,
+      "z": 1,
+      "d": "Extinderea sistemului de management integrat al traficului",
+      "st": "În execuție"
+    },
+    {
+      "id": "INV-09",
+      "s": "Strada Mandresti",
+      "v": 0,
+      "z": 6,
+      "d": "Extindere rețea de distribuție gaze naturale în cartierul Mândrești",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-A-1",
+      "s": "Strada Timis",
+      "v": 0,
+      "z": 3,
+      "d": "Refacere infrastructură și sistematizare verticală",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-A-2",
+      "s": "Strada Nicolae Balcescu",
+      "v": 0,
+      "z": 1,
+      "d": "Refacere infrastructură și sistematizare verticală",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-A-3",
+      "s": "Strada Predeal",
+      "v": 0,
+      "z": 2,
+      "d": "Refacere infrastructură (tronson I. Creangă - G. Ionescu)",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-A-4",
+      "s": "Strada Magazia Garii",
+      "v": 0,
+      "z": 1,
+      "d": "Reparații și așternere covoare asfaltice carosabil",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-B-1",
+      "s": "Strada Prof. C. Stere",
+      "v": 0,
+      "z": 3,
+      "d": "Refacere infrastructură și sistematizare verticală",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-B-2",
+      "s": "Strada Ecaterina Varga",
+      "v": 0,
+      "z": 3,
+      "d": "Refacere infrastructură și sistematizare verticală",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-B-3",
+      "s": "Strada Bujor",
+      "v": 0,
+      "z": 3,
+      "d": "Refacere infrastructură și sistematizare verticală",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-B-4",
+      "s": "Strada Agriculturii",
+      "v": 0,
+      "z": 3,
+      "d": "Refacere infrastructură și sistematizare verticală",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-B-5",
+      "s": "Strada Muresului",
+      "v": 0,
+      "z": 3,
+      "d": "Refacere infrastructură și sistematizare verticală",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-B-6",
+      "s": "Strada Cernei",
+      "v": 0,
+      "z": 3,
+      "d": "Refacere infrastructură și sistematizare verticală",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-B-7",
+      "s": "Strada Dogariei",
+      "v": 0,
+      "z": 3,
+      "d": "Refacere infrastructură și sistematizare verticală",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-B-8",
+      "s": "Strada Crisana",
+      "v": 0,
+      "z": 3,
+      "d": "Refacere infrastructură și sistematizare verticală",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-B-9",
+      "s": "Strada Greva de la Grivita",
+      "v": 0,
+      "z": 3,
+      "d": "Refacere infrastructură și sistematizare verticală",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-C-1",
+      "s": "Strada Alecu Sihleanu",
+      "v": 0,
+      "z": 4,
+      "d": "Refacere infrastructură (inclusiv fundătura)",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-C-2",
+      "s": "Strada Maior G. Sontu",
+      "v": 0,
+      "z": 4,
+      "d": "Refacere infrastructură (inclusiv fundătura)",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-C-3",
+      "s": "Strada Aviatorilor",
+      "v": 0,
+      "z": 4,
+      "d": "Refacere infrastructură stradă",
+      "st": "În execuție"
+    },
+    {
+      "id": "STR-C-4",
+      "s": "Aleea Cuza Voda",
+      "v": 0,
+      "z": 1,
+      "d": "Refacere infrastructură (inclusiv fundătura)",
+      "st": "În execuție"
+    }
   ]
 }
